@@ -1,0 +1,33 @@
+$lighter-grey: #f8f7f4;
+$dark-grey: #757575;
+$cream: #f7f6e7;
+$orange-strong: #e32636;
+
+.list-item {
+  display: block;
+  margin: 2rem 0;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  transition: border 0.25s ease-in;
+  overflow: hidden;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.15);
+  &:hover {
+    border: 1px solid $orange-strong;
+  }
+  a {
+    padding: 1rem;
+    // background-color: $lighter-grey;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    h3 {
+      color: black;
+    }
+    p {
+      color: $dark-grey;
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+  }
+}

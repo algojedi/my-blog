@@ -1,21 +1,42 @@
 import React from "react"
-import { Link } from "gatsby"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import Img from "gatsby-image"
+import { Link, graphql } from "gatsby"
+import Head from "../components/head"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+// avatar: file(absolutePath: { regex: "/sbphoto-sm.jpg/" }) {
+//         childImageSharp {
+//           fixed(width: 50, height: 50) {
+//             ...GatsbyImageSharpFixed
+//           }
+//         }
+//       }
 
-export default IndexPage
+//the below query result will get sent to this component as a prop
+export const query = graphql`
+  query {
+    avatar: file(relativePath: { eq: "images/sbphoto-sm.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 100, maxHeight: 200) {
+          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluidLimitPresentationSize
+        }
+      }
+    }
+  }
+`
+const Index = props => {
+  console.log("$$$$ the image is in.... ", props.data)
+  return (
+    <Layout>
+      <Head subtitle="Home" />
+      <div>I Played Around... still working?</div>
+
+      <Img fluid={props.data.avatar.childImageSharp.fluid} alt="" />
+      <p>
+        <Link to="/404">lets go to blog</Link>
+      </p>
+    </Layout>
+  )
+}
+export default Index

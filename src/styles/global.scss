@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: rgb(79, 79, 79);
+}
+
+/* Reset provided by https://github.com/gatsbyjs/gatsby-starter-blog via MIT license */
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  // padding: 3rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+// .code-container {
+// }
+// .code {
+//   border-radius: 1rem;
+//   padding: 1rem;
+//   color: black;
+//   line-height: 0.25px;
+// }
+.blog-date-reading-time {
+  margin: 1rem 0;
+  color: gray;
+  //font-weight: lighter;
+}
+.blog-date {
+  color: inherit;
+}
+.reading-time {
+  color: inherit;
+}
