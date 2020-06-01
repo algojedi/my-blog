@@ -1,8 +1,13 @@
 import React from "react"
 import footerStyle from "./footer.module.scss"
+import Bio from "./bio"
 
 const Footer = () => {
-  return <footer>S Banwait 2020</footer>
+  return (
+    <footer>
+      <Bio />
+    </footer>
+  )
 }
 
 export default Footer

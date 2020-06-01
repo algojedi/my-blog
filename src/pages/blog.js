@@ -29,7 +29,7 @@ const BlogPage = () => {
 
   return (
     <Layout>
-      <h1>Blog</h1>
+      <h2 className="page-title">Blog</h2>
       <ol className={blogStyles.posts}>
         {data.allMarkdownRemark.edges.map(({ node }) => {
           return (
@@ -37,8 +37,7 @@ const BlogPage = () => {
               <Link to={`/blog/${node.fields.slug}`}>
                 <h2>{node.frontmatter.title}</h2>
                 <p>
-                  <span>{node.fields.readingTime.text}</span>
-                  {node.frontmatter.date}
+                  {node.fields.readingTime.text} | {node.frontmatter.date}
                 </p>
               </Link>
             </li>

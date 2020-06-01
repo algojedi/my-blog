@@ -16,16 +16,14 @@ $orange-strong: #e32636;
   }
   a {
     padding: 1rem;
-    // background-color: $lighter-grey;
     display: block;
     text-decoration: none;
     cursor: pointer;
     h3 {
-      color: black;
+      color: $dark-grey;
     }
     p {
       color: $dark-grey;
-      font-style: italic;
       font-size: 0.9rem;
       margin-top: 0.5rem;
     }

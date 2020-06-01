@@ -8,7 +8,7 @@ const Contact = () => {
   return (
     <Layout>
       <Head subtitle="Contact" />
-      <div>contact me</div>
+      <h2 className="page-title">Contact Me</h2>
     </Layout>
   )
 }

@@ -48,5 +48,9 @@ module.exports = {
   siteMetadata: {
     author: "Sukhdev Banwait",
     title: "SUKHDEV BANWAIT",
+    description: "A blog to journal my revelations in software development",
+    social: {
+      twitter: `codemanjedi`,
+    },
   },
 }

@@ -28,16 +28,6 @@ const Header = () => {
             <Link
               className={headerStyle.navLink}
               activeClassName={headerStyle.activeLink}
-              to="/about"
-            >
-              About
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              className={headerStyle.navLink}
-              activeClassName={headerStyle.activeLink}
               to="/blog"
             >
               Blog
