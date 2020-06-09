@@ -23,17 +23,17 @@ const Blog = ({ data, pageContext }) => {
   return (
     <Layout>
       <Head subtitle="blog" />
-      <h1>{post.frontmatter.title}</h1>
-      <p className="blog-date-reading-time">
-        <span className="blog-date"> {post.frontmatter.date}</span> |{" "}
-        <span className="reading-time">{pageContext.readingTime}</span>
-      </p>
+      <h1 className={templateStyle.title}>{post.frontmatter.title}</h1>
+        <div className={templateStyle.subtitle}>
+          <span className={templateStyle.blogDate}> {post.frontmatter.date}</span> |{" "}
+          <span className={templateStyle.readingTime}>{pageContext.readingTime}</span>
+        </div>
       <div className={templateStyle.content}
         dangerouslySetInnerHTML={{
           __html: post.html,
         }}
       ></div>
-    </Layout>
+    </Layout> 
   )
 }
 

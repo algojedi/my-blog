@@ -11,68 +11,57 @@ date: "2020-05-31"
 
 Solving leetcode/hackerrank problems quickly and efficiently in order to prepare for a technical interview can seem like a daunting task. What a relief to find out many of these problems can be solved relatively easily by applying certain algorithms or techniques. Enter the sliding window, a pattern or technique to efficiently solve coding problems related to finding max/min substrings or other problems solved with the help of visualizing a sliding window across an array.
 
-Although it may not always be straightforward to recognize, a solution normally has the following conditions/keywords in the question:
-
-
-- longest substring/subsequence/subarray
-- shortest substring/subsequence/subarray
-- max/min substring/subsequence/subarray
-
-If a question includes these keywords or can be rephrased to include them, then there’s a very good chance the sliding window approach is in order.  
+Although it may not always be straightforward to recognize when to apply this technique, a good hint is noting whether or not the solution requires us to find the **longest, shortest, or max/min** contiguous subsection of a given string, sequence or array. If it does, then slide that window!
 
 Complexity: typically O(n) time and O(1) space  
 
-There are three variations to be aware of and it’s up to you to figure out which one to choose, although there should be enough clues to make it clear.
+There are three sliding window variations to be aware of, but hopefully there's enough clues in the problem description to make it clear which one to choose.
+
 In all cases though, envision a window “sliding” through a sequence of elements while recording data in each step of the movement. When the window has reached the end of the sequence, the slide halts and the appropriate data is displayed. NOTE: sometimes reaching the end may mean the end of the window must reach the end of the sequence, and sometimes the start must as well.
 
-// pseudocode-ish example
-windowStartIndex, windowEndIndex, runningTotal = 0  
-returnValue //often will be the min or max of some data.
+####Pseudocode-ish Example
 
-Handle base cases <br/> 
-“Slide” the window until the end of the window reaches the end of the sequence (loop)
-Update runningTotal – normally based on arithmetic on the element at windowEndIndex
-Conditionally adjust returnValue after comparing runningTotal to returnValue
-//this is often condensed as a max or min call
-Slide the window by incrementing the end
-Conditionally increment start index based on problem requirement
-//this should also include discarding the old value at windowStartIndex from runningTotal
-Return returnValue
+- Track both ends of the window, the running total, and the final return value, or optimum
+- Loop until the end of the window reaches the end of the sequence 
+- Update the running total – normally based on arithmetic on the element at the window's end 
+- Conditionally adjust optimum value after comparing it to the running total 
+- Slide the window by incrementing it's end
+- Conditionally increment the start end of the window based on problem requirement
+- On loop termination, return the optimum value 
 
-This solution uses more variables than necessary as the window movement can be calculated simply by using the ‘i’ variable in a for loop; however, for clarity and flexibility, I prefer a while loop while managing variables for the window start and end index.
-The above solution structure can broken down into two main chunks:
+This solution uses more variables than necessary as the window movement can be calculated simply by using the ‘i’ variable in a for loop; however, for clarity and flexibility, I prefer a while loop while managing variables for the window start/end index.
+The above solution structure can be thought of as being composed of two main chunks: the first chunk calculates the optimal value and the second, moves the window. 
 
-Chunk 1: Calculate the return value
-Chunk 2: Move the window
+Although the pseudocode may seem simple, extra care should be taken when moving the window as all variables have to be accounted for, while also adhering to the conditions set out in the problem. ***NOTE:*** when "sliding" the front end of the window forward, remember to discard the old value at window's start and modify the running total!
 
-Although the pseudocode may seem simple, extra care should be taken when moving the window as all variables have to be accounted for, while also adhering to the conditions set out in the problem.
-
-####Case 1: FIXED WINDOW LENGTH
+###Case 1: FIXED WINDOW LENGTH
 
 Given an array of positive numbers and a positive number ‘k’, find the maximum sum of any contiguous subarray of size ‘k’.
 
 ```javascript
 function largestSum(k) {
-    // initialize variables
-    windowStartIndx = 0
-    windowEndIndx = 0
-    maxValue = Number.MIN_VALUE
-    currValue = 0
+  // initialize variables
+  windowStartIndx = 0
+  windowEndIndx = 0
+  // set the optimum to a value that MUST be overridden 
+  maxValue = Number.MIN_VALUE
+  currValue = 0 // the running total
 
-    while (windowEndIndx < arr.length ) {
-        currValue += arr[windowEndIndx]
-        maxValue = Math.max(currValue, maxValue)
-
-        if (windowEndIndx – windowStartIndx + 1 < k) {
-        windowEndIndx++
-        }
-        else {
-        currValue -= arr[windowStartIndx]
-        windowStartIndx++
-        windowEndIndx++
-        }
+  while (windowEndIndx < arr.length ) {
+    currValue += arr[windowEndIndx]
+    // compare the running total to the current optimum
+    maxValue = Math.max(currValue, maxValue)
+    // update running total based on problem specs
+    if (windowEndIndx – windowStartIndx + 1 < k) {
+      windowEndIndx++
     }
-    return maxValue
+    else {
+      currValue -= arr[windowStartIndx]
+      windowStartIndx++
+      windowEndIndx++
+    }
+  }
+  return maxValue
 }
 ```
 
@@ -97,7 +86,7 @@ windowEndIndx++
 
 ```
 
-####Case 2: VARIABLE WINDOW LENGTH
+###Case 2: VARIABLE WINDOW LENGTH
 It is sometimes the case that we are asked not to look for an optimal sum or measurement based on the elements within the window, but rather the window itself, namely it’s size as it meets certain conditions based on the elements within. These set of problems require the window size to be dynamic: the window start/end indices won’t always move in unison. The result will be a dynamically shrinking/growing window.  
 The main change to our code occurs in “chunk 2” where the window “moves”. Here is the revised pseudo-ish code:
 
