@@ -4,6 +4,7 @@ import contactStyle from "./contact.module.scss"
 import Layout from "../components/layout"
 
 import Head from "../components/head"
+
 const Contact = () => {
   return (
     <Layout>
